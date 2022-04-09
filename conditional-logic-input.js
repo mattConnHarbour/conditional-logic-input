@@ -1,20 +1,16 @@
 Vue.component('conditional-logic-input', {
-    props: ['conditionalInputs'],
-    data(){
-        return {
-            inputKeySequence: [],
-        }
-    },
+    props: ['conditionalInputs', 'start', 'array', 'object'],
     methods: {
         updateSelection(key, option) {
             this.conditionalInputs[key].selection = [option]
             this.conditionalInputs[key].nextInput = this.conditionalInputs[key].options[option]
-            this.generateInputKeySequence()
         },
 
-        generateInputKeySequence(){
+    },
+    computed: {
+        inputKeySequence(){
             const newSequence = [] 
-            let nextInput = this.conditionalInputs.start
+            let nextInput = this.start
 
             while(nextInput){
                 newSequence.push(nextInput)
@@ -22,11 +18,8 @@ Vue.component('conditional-logic-input', {
                 nextInput = selection
             }
 
-            this.inputKeySequence = newSequence 
+            return newSequence 
         }
-    },
-    mounted: function(){
-        this.generateInputKeySequence()
     },
     template: `
     <div class="conditional-logic-input">
@@ -34,16 +27,17 @@ Vue.component('conditional-logic-input', {
                 <p class="content">{{ conditionalInputs[key].text }}</p>
                 <b-field>
                     <b-checkbox-button
-                    v-for="option in Object.keys(conditionalInputs[key].options)"
+                    v-for="option in conditionalInputs[key].options"
                     v-model="conditionalInputs[key].selection"
                     @input="updateSelection(key, option)"
                     :native-value="option"
                     >
                         <b-icon icon="check"></b-icon>
-                        <span>{{option}}</span>
+                        <span>{{option.option}}</span>
                     </b-checkbox-button>
                 </b-field>
             </section>
+            {{ object }}
     </div>
     `
 })

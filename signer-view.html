@@ -18,15 +18,28 @@
 </head>
 
 <body>
-    <div id="app" class="container p-3">
+    <div id="app" class="container columns p-3" style="margin: 0 auto;">
 
-        <conditional-logic-input :conditional-inputs="inputs"></conditional-logic-input>
+        <div class="column">
+            <h1 class="title" style="border-bottom: solid 1px lightgrey;">Creator View</h1>
+            <input-card
+                v-for="input in inputs"
+                :input="input"
+                :conditional-inputs="inputs">
+            </input-card>
+            <conditional-logic-builder :conditional-inputs="inputs"></conditional-logic-builder>
+        </div>
+        <div class="column">
+            <h1 class="title" style="border-bottom: solid 1px lightgrey;">Signer View</h1>
+            <conditional-logic-input :start="start" :conditional-inputs="inputs"></conditional-logic-input>
+        </div>
 
 
     </div>
 
-
     <script src="inputs.js"></script>
+    <script src="input-card.js"></script>
+    <script src="conditional-logic-builder.js"></script>
     <script src="conditional-logic-input.js"></script>
     <script src="index.js" ></script>
 </body>

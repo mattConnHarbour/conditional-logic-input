@@ -22,10 +22,20 @@ const inputs = {
     staying: {
         text: 'Will you be staying at The Inn?',
         options: {
-            Yes: 'dining',
+            Yes: 'duration',
             No: null
         },
         selection: [],
         nextInput: null
-    }
+    },
+    duration: {
+        text: 'How long will you be staying with us?',
+        options: {
+            'Three nights': 'dining',
+            'One week': 'dining',
+            'More': 'dining',
+        },
+        selection: [],
+        nextInput: null
+    },
 }
